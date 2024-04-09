@@ -2,7 +2,6 @@
 """
 Created on Sun Feb 18 20:18:55 2024
 
-@author: ABorisenko
 """
 
 # Copyright 2018-2021 Xanadu Quantum Technologies Inc.
@@ -21,9 +20,10 @@ Created on Sun Feb 18 20:18:55 2024
 """Quantum natural gradient optimizer with momentum"""
 # pylint: disable=too-many-branches
 # pylint: disable=too-many-arguments
-from pennylane import numpy as pnp
+
 
 import pennylane as qml
+from pennylane import numpy as pnp
 from pennylane.utils import _flatten, unflatten
 from .gradient_descent import GradientDescentOptimizer
 
