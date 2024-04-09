@@ -1,2 +1,2 @@
 # Momentum-QNG
-Implementation of the Quantu Natural Gradient with Momentum optimizer
+Implementation and benchmarking of the Quantum Natural Gradient with Momentum optimizer
