@@ -187,7 +187,7 @@ class MomentumQNGOptimizer(GradientDescentOptimizer):
             prior to the step
         """
         # pylint: disable=arguments-differ
-        if not isinstance(qnode, (qml.QNode, qml.ExpvalCost)) and metric_tensor_fn is None:
+        if not isinstance(qnode, (qml.QNode, qml.expval)) and metric_tensor_fn is None:
             raise ValueError(
                 "The objective function must either be encoded as a single QNode or "
                 "an ExpvalCost object for the natural gradient to be automatically computed. "
@@ -209,7 +209,7 @@ class MomentumQNGOptimizer(GradientDescentOptimizer):
             )
 
         g, forward = self.compute_grad(qnode, args, kwargs, grad_fn=grad_fn)
-        new_args = pnp.array(self.apply_grad(g, args), requires_grad=True)
+        new_args = np.array(self.apply_grad(g, args), requires_grad=True)
 
         if forward is None:
             forward = qnode(*args, **kwargs)
@@ -282,9 +282,9 @@ class MomentumQNGOptimizer(GradientDescentOptimizer):
             array: the new values :math:`x^{(t+1)}`
         """
         if self.accumulation is None:
-            self.accumulation = 0 * pnp.array(list(_flatten(args))) #[0.0] * len(args)
-        grad_flat = pnp.array(list(_flatten(grad)))
-        x_flat = pnp.array(list(_flatten(args)))
-        self.accumulation = self.momentum * self.accumulation + self.stepsize * pnp.linalg.solve(self.metric_tensor, grad_flat)
+            self.accumulation = 0 * np.array(list(_flatten(args))) #[0.0] * len(args)
+        grad_flat = np.array(list(_flatten(grad)))
+        x_flat = np.array(list(_flatten(args)))
+        self.accumulation = self.momentum * self.accumulation + self.stepsize * np.linalg.solve(self.metric_tensor, grad_flat)
         x_new_flat = x_flat - self.accumulation
         return unflatten(x_new_flat, args)
