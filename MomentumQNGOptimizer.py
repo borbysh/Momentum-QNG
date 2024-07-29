@@ -26,7 +26,7 @@ https://docs.pennylane.ai/en/stable/_modules/pennylane/optimize/qng.html#QNGOpti
 import pennylane as qml
 from pennylane import numpy as pnp
 from pennylane.utils import _flatten, unflatten
-from .gradient_descent import GradientDescentOptimizer
+from pennylane import GradientDescentOptimizer
 
 
 class MomentumQNGOptimizer(GradientDescentOptimizer):
