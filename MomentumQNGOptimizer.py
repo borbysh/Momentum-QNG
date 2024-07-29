@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sun Feb 18 20:18:55 2024
-
+This is a modified version of the original Pennylane QNGOptimizer class taken from
+https://docs.pennylane.ai/en/stable/_modules/pennylane/optimize/qng.html#QNGOptimizer
 """
 
 # Copyright 2018-2021 Xanadu Quantum Technologies Inc.
