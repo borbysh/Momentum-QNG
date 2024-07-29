@@ -30,16 +30,16 @@ from .gradient_descent import GradientDescentOptimizer
 
 
 class MomentumQNGOptimizer(GradientDescentOptimizer):
-    r"""Optimizer with adaptive learning rate, via calculation
+    r"""Optimizer with momentum (inertial) term and adaptive learning rate, via calculation
     of the diagonal or block-diagonal approximation to the Fubini-Study metric tensor.
     A quantum generalization of natural gradient descent.
 
-    The QNG optimizer uses a step- and parameter-dependent learning rate,
+    The Momentum-QNG optimizer uses a step- and parameter-dependent learning rate,
     with the learning rate dependent on the pseudo-inverse
     of the Fubini-Study metric tensor :math:`g`:
 
     .. math::
-        x^{(t+1)} = x^{(t)} - \eta g(f(x^{(t)}))^{-1} \nabla f(x^{(t)}),
+        x^{(t+1)} = x^{(t)} + momentum*(x^{(t)} - x^{(t-1)}) - \eta g(f(x^{(t)}))^{-1} \nabla f(x^{(t)}),
 
     where :math:`f(x^{(t)}) = \langle 0 | U(x^{(t)})^\dagger \hat{B} U(x^{(t)}) | 0 \rangle`
     is an expectation value of some observable measured on the variational
