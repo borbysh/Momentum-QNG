@@ -114,7 +114,7 @@ class MomentumQNGOptimizer(GradientDescentOptimizer):
     optimizer's ``step`` function:
 
     >>> eta = 0.01
-    >>> init_params = np.array([0.011, 0.012])
+    >>> init_params = pnp.array([0.011, 0.012])
     >>> opt = qml.QNGOptimizer(eta)
     >>> theta_new = opt.step(circuit, init_params)
     >>> theta_new
@@ -210,7 +210,7 @@ class MomentumQNGOptimizer(GradientDescentOptimizer):
             )
 
         g, forward = self.compute_grad(qnode, args, kwargs, grad_fn=grad_fn)
-        new_args = np.array(self.apply_grad(g, args), requires_grad=True)
+        new_args = pnp.array(self.apply_grad(g, args), requires_grad=True)
 
         if forward is None:
             forward = qnode(*args, **kwargs)
@@ -283,9 +283,9 @@ class MomentumQNGOptimizer(GradientDescentOptimizer):
             array: the new values :math:`x^{(t+1)}`
         """
         if self.accumulation is None:
-            self.accumulation = 0 * np.array(list(_flatten(args))) #[0.0] * len(args)
-        grad_flat = np.array(list(_flatten(grad)))
-        x_flat = np.array(list(_flatten(args)))
-        self.accumulation = self.momentum * self.accumulation + self.stepsize * np.linalg.solve(self.metric_tensor, grad_flat)
+            self.accumulation = 0 * pnp.array(list(_flatten(args))) #[0.0] * len(args)
+        grad_flat = pnp.array(list(_flatten(grad)))
+        x_flat = pnp.array(list(_flatten(args)))
+        self.accumulation = self.momentum * self.accumulation + self.stepsize * pnp.linalg.solve(self.metric_tensor, grad_flat)
         x_new_flat = x_flat - self.accumulation
         return unflatten(x_new_flat, args)
