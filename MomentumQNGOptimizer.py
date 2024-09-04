@@ -28,12 +28,14 @@ from pennylane import numpy as pnp
 from pennylane.utils import _flatten, unflatten
 from pennylane import GradientDescentOptimizer
 
-
+"""Published at https://arxiv.org/abs/2409.01978"""
 class MomentumQNGOptimizer(GradientDescentOptimizer):
     r"""Optimizer with momentum (inertial) term and adaptive learning rate, via calculation
     of the diagonal or block-diagonal approximation to the Fubini-Study metric tensor.
     A quantum generalization of natural gradient descent.
 
+    
+    
     The Momentum-QNG optimizer uses a step- and parameter-dependent learning rate,
     with the learning rate dependent on the pseudo-inverse
     of the Fubini-Study metric tensor :math:`g`:
