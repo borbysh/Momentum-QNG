@@ -42,16 +42,21 @@ class MomentumQNGOptimizer(QNGOptimizer):
             array: the new values :math:`x^{(t+1)}`
         """
         args_new = list(args)
+        # Alex: in this way, self.accumulation seems to have the same shape as args_new
+        if self.accumulation is None:
+            self.accumulation = [pnp.zeros_like(a).tolist() for a in args_new]
+            
         mt = self.metric_tensor if isinstance(self.metric_tensor, tuple) else (self.metric_tensor,)
-
+        
         trained_index = 0
-        new_accumulation = []
+        # new_accumulation = []
         for index, arg in enumerate(args):
             if getattr(arg, "requires_grad", False):
                 grad_flat = pnp.array(list(_flatten(grad[trained_index])))
                 # self.metric_tensor has already been reshaped to 2D, matching flat gradient.
                 qng_update = pnp.linalg.solve(mt[trained_index], grad_flat)
-
+                """"
+                Alex: I changed this part a little bit to deal with self.accumulation directly
                 if self.accumulation is None:
                     accum = 0 * grad_flat
                 else:
@@ -59,10 +64,13 @@ class MomentumQNGOptimizer(QNGOptimizer):
 
                 accum += self.stepsize * update
                 new_accumulation.append(accum)
-                args_new[index] = arg - unflatten(accum, grad[trained_index])
+                """"
+                self.accumulation[index] *= self.momentum
+                self.accumulation[index] += self.stepsize * unflatten(qng_update, grad[trained_index])
+                args_new[index] = arg - self.accumulation[index]
 
                 trained_index += 1
 
-        self.accumulation = new_accumulation
+        # self.accumulation = new_accumulation
 
         return tuple(args_new)
