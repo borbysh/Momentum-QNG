@@ -23,18 +23,18 @@ from .qng import QNGOptimizer
 
 class MomentumQNGOptimizer(QNGOptimizer):
     r"""A generalization of the Quantum Natural Gradient (QNG) optimizer by considering a discrete-time Langevin equation
-    with QNG force.
+    with QNG force. For details of the theory and derivation of Momentum-QNG, please, see https://arxiv.org/abs/2409.01978
 
-    
-    
-    The Momentum-QNG optimizer uses a step- and parameter-dependent learning rate,
-    with the learning rate dependent on the pseudo-inverse
-    of the Fubini-Study metric tensor :math:`g`:
+    In PennyLane, the MomentumQNGOptimizer class is a subclass of the QNGOptimizer class and requires one additional 
+    hyperparameter (the momentum coefficient) :math:`0 \leq \rho < 1`, the default value being :math:`\rho=0.9`. For :math:`\rho=0` Momentum-QNG
+    reduces to the basic QNG.
+    In this way, the parameter update rule in Momentum-QNG reads:
 
     .. math::
-        x^{(t+1)} = x^{(t)} + momentum*(x^{(t)} - x^{(t-1)}) - \eta g(f(x^{(t)}))^{-1} \nabla f(x^{(t)}),
-
-    where :math:`f(x^{(t)}) = \langle 0 | U(x^{(t)})^\dagger \hat{B} U(x^{(t)}) | 0 \rangle`
+        x^{(t+1)} = x^{(t)} + \rho (x^{(t)} - x^{(t-1)}) - \eta g(f(x^{(t)}))^{-1} \nabla f(x^{(t)}),
+    
+    where :math:`\eta` is a stepsize (learning rate) value, :math:`g(f(x^{(t)}))^{-1}` is the pseudo-inverse
+    of the Fubini-Study metric tensor and :math:`f(x^{(t)}) = \langle 0 | U(x^{(t)})^\dagger \hat{B} U(x^{(t)}) | 0 \rangle`
     is an expectation value of some observable measured on the variational
     quantum circuit :math:`U(x^{(t)})`.
 
@@ -128,6 +128,7 @@ class MomentumQNGOptimizer(QNGOptimizer):
         for more details on Fubini-Study metric tensor and this optimization class.
 
     Keyword Args:
+        momentum=0.9 (float): the user-defined hyperparameter :math:`\rho`
         stepsize=0.01 (float): the user-defined hyperparameter :math:`\eta`
         approx (str): Which approximation of the metric tensor to compute.
 
