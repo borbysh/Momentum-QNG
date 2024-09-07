@@ -25,7 +25,10 @@ class MomentumQNGOptimizer(QNGOptimizer):
     r"""A generalization of the Quantum Natural Gradient (QNG) optimizer by considering a discrete-time Langevin equation
     with QNG force. For details of the theory and derivation of Momentum-QNG, please, see: 
     
-        https://arxiv.org/abs/2409.01978
+        Oleksandr Borysenko, Mykhailo Bratchenko, Ilya Lukin, Mykola Luhanko, Ihor Omelchenko,
+        Andrii Sotnikov and Alessandro Lomi.
+        "Application of Langevin Dynamics to Advance the Quantum Natural Gradient Optimization Algorithm"
+        <https://arxiv.org/abs/2409.01978>
 
     In PennyLane, the MomentumQNGOptimizer class is a subclass of the QNGOptimizer class and requires one additional 
     hyperparameter (the momentum coefficient) :math:`0 \leq \rho < 1`, the default value being :math:`\rho=0.9`. For :math:`\rho=0` Momentum-QNG
@@ -99,10 +102,10 @@ class MomentumQNGOptimizer(QNGOptimizer):
 
     .. seealso::
 
-        See the next examples of the Pennylane code benchmarking the Momentum-QNG optimizer 
+        See the next examples of the Pennylane code, benchmarking the Momentum-QNG optimizer 
         together with the basic QNG, Momentum and Adam: 
             QAOA:     https://github.com/borbysh/Momentum-QNG/blob/main/QAOA_depth4.ipynb
-            VQE:      
+            VQE:      https://github.com/borbysh/Momentum-QNG/blob/main/portfolio_optimization.ipynb
 
     Keyword Args:
         momentum=0.9 (float): the user-defined hyperparameter :math:`\rho`
