@@ -23,7 +23,9 @@ from .qng import QNGOptimizer
 
 class MomentumQNGOptimizer(QNGOptimizer):
     r"""A generalization of the Quantum Natural Gradient (QNG) optimizer by considering a discrete-time Langevin equation
-    with QNG force. For details of the theory and derivation of Momentum-QNG, please, see https://arxiv.org/abs/2409.01978
+    with QNG force. For details of the theory and derivation of Momentum-QNG, please, see: 
+    
+        https://arxiv.org/abs/2409.01978
 
     In PennyLane, the MomentumQNGOptimizer class is a subclass of the QNGOptimizer class and requires one additional 
     hyperparameter (the momentum coefficient) :math:`0 \leq \rho < 1`, the default value being :math:`\rho=0.9`. For :math:`\rho=0` Momentum-QNG
@@ -93,39 +95,14 @@ class MomentumQNGOptimizer(QNGOptimizer):
 
     **Examples:**
 
-    For VQE/VQE-like problems, the objective function for the optimizer can be
-    realized as :class:`~.QNode` that returns the expectation value of a Hamiltonian.
-
-    >>> dev = qml.device("default.qubit", wires=(0, 1, "aux"))
-    >>> @qml.qnode(dev)
-    ... def circuit(params):
-    ...     qml.RX(params[0], wires=0)
-    ...     qml.RY(params[1], wires=0)
-    ...     return qml.expval(qml.PauliX(0) + qml.PauliX(1))
-
-    Once constructed, the cost function can be passed directly to the
-    optimizer's ``step`` function:
-
-    >>> eta = 0.01
-    >>> init_params = pnp.array([0.011, 0.012])
-    >>> opt = qml.QNGOptimizer(eta)
-    >>> theta_new = opt.step(circuit, init_params)
-    >>> theta_new
-    tensor([ 0.01100528, -0.02799954], requires_grad=True)
-
-    An alternative function to calculate the metric tensor of the QNode
-    can be provided to :meth:`~.step`
-    via the ``metric_tensor_fn`` keyword argument.  For example, we can provide a function
-    to calculate the metric tensor via the adjoint method.
-
-    >>> adj_metric_tensor = qml.adjoint_metric_tensor(circuit, circuit.device)
-    >>> opt.step(circuit, init_params, metric_tensor_fn=adj_metric_tensor)
-    tensor([ 0.01100528, -0.02799954], requires_grad=True)
+    TODO
 
     .. seealso::
 
-        See the :ref:`quantum natural gradient example <quantum_natural_gradient>`
-        for more details on Fubini-Study metric tensor and this optimization class.
+        See the next examples of the Pennylane code benchmarking the Momentum-QNG optimizer 
+        together with the basic QNG, Momentum and Adam: 
+            QAOA:     https://github.com/borbysh/Momentum-QNG/blob/main/QAOA_depth4.ipynb
+            VQE:      
 
     Keyword Args:
         momentum=0.9 (float): the user-defined hyperparameter :math:`\rho`
