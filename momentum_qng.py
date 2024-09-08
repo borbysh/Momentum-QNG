@@ -146,7 +146,7 @@ class MomentumQNGOptimizer(QNGOptimizer):
         args_new = list(args)
         
         if self.accumulation is None:
-            self.accumulation = [pnp.zeros_like(a) for a in args_new]
+            self.accumulation = [pnp.zeros_like(g) for g in grad]
             
         mt = self.metric_tensor if isinstance(self.metric_tensor, tuple) else (self.metric_tensor,)
         
@@ -158,9 +158,9 @@ class MomentumQNGOptimizer(QNGOptimizer):
                 # self.metric_tensor has already been reshaped to 2D, matching flat gradient.
                 qng_update = pnp.linalg.solve(mt[trained_index], grad_flat)
                 
-                self.accumulation[index] *= self.momentum
-                self.accumulation[index] += self.stepsize * unflatten(qng_update, grad[trained_index])
-                args_new[index] = arg - self.accumulation[index]
+                self.accumulation[trained_index] *= self.momentum
+                self.accumulation[trained_index] += self.stepsize * unflatten(qng_update, grad[trained_index])
+                args_new[index] = arg - self.accumulation[trained_index]
 
                 trained_index += 1
 
