@@ -18,7 +18,7 @@
 from pennylane import numpy as pnp
 from pennylane.utils import _flatten, unflatten
 
-from .qng import QNGOptimizer
+from pennylane import QNGOptimizer
 
 class MomentumQNGOptimizer(QNGOptimizer):
     r"""A generalization of the Quantum Natural Gradient (QNG) optimizer by considering a discrete-time Langevin equation
