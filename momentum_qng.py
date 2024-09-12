@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Quantum natural gradient optimizer with momentum"""
-import pennylane as qml
 
 # pylint: disable=too-many-branches
 # pylint: disable=too-many-arguments
@@ -28,11 +27,11 @@ class MomentumQNGOptimizer(QNGOptimizer):
         Oleksandr Borysenko, Mykhailo Bratchenko, Ilya Lukin, Mykola Luhanko, Ihor Omelchenko,
         Andrii Sotnikov and Alessandro Lomi.
         "Application of Langevin Dynamics to Advance the Quantum Natural Gradient Optimization Algorithm"
-        <https://arxiv.org/abs/2409.01978>
+        `arXiv:2409.01978 <https://arxiv.org/abs/2409.01978>`__
 
     We are grateful to David Wierichs for his generous help with the multi-argument variant of the MomentumQNGOptimizer class.
     
-    In PennyLane, the MomentumQNGOptimizer class is a subclass of the QNGOptimizer class and requires one additional 
+    ``MomentumQNGOptimizer`` is a subclass of the ``QNGOptimizer`` class and requires one additional 
     hyperparameter (the momentum coefficient) :math:`0 \leq \rho < 1`, the default value being :math:`\rho=0.9`. For :math:`\rho=0` Momentum-QNG
     reduces to the basic QNG.
     In this way, the parameter update rule in Momentum-QNG reads:
@@ -104,14 +103,14 @@ class MomentumQNGOptimizer(QNGOptimizer):
 
     .. seealso::
 
-        See the next examples of the Pennylane code, benchmarking the Momentum-QNG optimizer 
-        together with the basic QNG, Momentum and Adam: 
-            QAOA:     https://github.com/borbysh/Momentum-QNG/blob/main/QAOA_depth4.ipynb
-            VQE:      https://github.com/borbysh/Momentum-QNG/blob/main/portfolio_optimization.ipynb
+        Also see the examples from the reference above, benchmarking the Momentum-QNG optimizer 
+        against the basic QNG, Momentum and Adam: 
+        - `QAOA <https://github.com/borbysh/Momentum-QNG/blob/main/QAOA_depth4.ipynb>`__
+        - `VQE <https://github.com/borbysh/Momentum-QNG/blob/main/portfolio_optimization.ipynb>`__
 
     Keyword Args:
-        momentum=0.9 (float): the user-defined hyperparameter :math:`\rho`
         stepsize=0.01 (float): the user-defined hyperparameter :math:`\eta`
+        momentum=0.9 (float): the user-defined hyperparameter :math:`\rho`
         approx (str): Which approximation of the metric tensor to compute.
 
             - If ``None``, the full metric tensor is computed
@@ -167,5 +166,5 @@ class MomentumQNGOptimizer(QNGOptimizer):
                 trained_index += 1
 
         
-
+ 
         return tuple(args_new)
