@@ -1,7 +1,7 @@
 # Momentum-QNG
 Implementation and benchmarking of the Quantum Natural Gradient with Momentum optimizer. Published at https://arxiv.org/abs/2409.01978
 
-<img src="Santa.png" width=768 height=1024 />
+<img src="Santa.png" width=384 height=512 />
 
 We are grateful to [David Wierichs](mailto:david.wierichs@xanadu.ai) for his generous help with the multi-argument variant of the [MomentumQNGOptimizer](https://github.com/borbysh/Momentum-QNG/blob/main/momentum_qng.py) class.
 
