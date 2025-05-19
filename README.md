@@ -2,10 +2,9 @@
 Implementation and benchmarking of the Quantum Natural Gradient with Momentum optimizer. Published at https://arxiv.org/abs/2409.01978
 
 # Environment Setup Required
+This project contains multiple Jupyter Notebooks that require additional environment setup before they can be run successfully. The code across the notebooks depends on various external Python libraries that are not included by default in a standard Python or Jupyter installation.
 
-The benchmarking codes Jupyter Notebook requires additional environment setup before it can be run successfully. The code depends on several external Python libraries that are not included by default in a standard Python or Jupyter installation.
-
-Before running the notebook, please review the import statements and make sure all necessary packages are installed in your Python environment. You can install any missing dependencies using pip.
+Before running any of the notebooks, please review the import statements in each file and ensure that all necessary packages are installed in your Python environment. You can install missing dependencies using pip.
 
 <img src="Santa.png" width=384 height=512 />
 
