@@ -1,7 +1,7 @@
 # Momentum-QNG
 Implementation and benchmarking of the Quantum Natural Gradient with Momentum optimizer. Published at https://arxiv.org/abs/2409.01978
 
-# Environment Setup Required
+### _Environment Setup Required_
 This project contains multiple Jupyter Notebooks that require additional environment setup before they can be run successfully. The code across the notebooks depends on various external Python libraries that are not included by default in a standard Python or Jupyter installation.
 
 Before running any of the notebooks, please review the import statements in each file and ensure that all necessary packages are installed in your Python environment. You can install missing dependencies using pip.
